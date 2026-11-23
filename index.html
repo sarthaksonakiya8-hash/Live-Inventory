@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluefin Insights — Modern Talent &amp; Bid Hub</title>
+  <style>
+    :root {
+      --bg-page: #f5f2eb;
+      --bg-card: #ffffff;
+      --bg-subtle: #ebe5d8;
+      --bg-hover: #f9f7f2;
+      --navy: #14284b;
+      --navy-hover: #1f3c6e;
+      --slate-blue: #2d5488;
+      --blue-tint: #ebf2fa;
+      --blue-border: #c5d7ed;
+      --beige-tint: #f2ece0;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --border: #dfd8c8;
+      --green-bg: #e7f5ee;
+      --green-text: #15633d;
+      --green-border: #b6dec9;
+      --amber-bg: #fef4e2;
+      --amber-text: #92540c;
+      --amber-border: #f3d299;
+      --red-bg: #fdf0ee;
+      --red-text: #9b2c2c;
+      --red-border: #edc2bc;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --shadow-xs: 0 1px 2px rgba(20, 40, 75, 0.05);
+      --shadow-sm: 0 4px 12px rgba(20, 40, 75, 0.06);
+      --shadow-lg: 0 20px 44px rgba(20, 40, 75, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-size: 14.5px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Modern Top App Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--navy);
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0 24px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--bg-page);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: grid;
+      place-items: center;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      margin-left: 8px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .nav-tab {
+      border: none;
+      background: transparent;
+      color: #dbe4f0;
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-tab.active {
+      background: #ffffff;
+      color: var(--navy);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    }
+
+    .tab-badge {
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .nav-tab.active .tab-badge {
+      background: var(--blue-tint);
+      color: var(--navy);
+    }
+
+    /* Main Content */
+    main {
+      padding: 24px 24px 64px;
+    }
+
+    /* Precise KPI Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .kpi-label {
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .kpi-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-top: 2px;
+      letter-spacing: -0.02em;
+    }
+
+    .kpi-sub {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Upper Toolbar with Search + List-style Skill Dropdown + Compact Filters */
+    .toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .search-wrap {
+      flex: 2;
+      min-width: 220px;
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px 0 34px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .search-wrap input:focus {
+      outline: none;
+      background: #ffffff;
+      border-color: var(--slate-blue);
+      box-shadow: 0 0 0 3px rgba(45, 84, 136, 0.12);
+    }
+
+    .search-ico {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    /* Custom Searchable List Dropdown for Skills (Clean, compact, modern) */
+    .skill-dropdown {
+      position: relative;
+      min-width: 245px;
+      flex: 1.2;
+    }
+
+    .dropdown-trigger {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+
+    .dropdown-trigger:hover {
+      border-color: var(--slate-blue);
+    }
+
+    .dropdown-trigger.has-value {
+      background: var(--blue-tint);
+      border-color: var(--slate-blue);
+      color: var(--navy);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 310px;
+      max-height: 360px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 80;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .dropdown-menu.open {
+      display: flex;
+    }
+
+    .dropdown-search {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-hover);
+    }
+
+    .dropdown-search input {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-family: var(--font-sans);
+    }
+
+    .dropdown-search input:focus {
+      outline: none;
+      border-color: var(--slate-blue);
+    }
+
+    .dropdown-list {
+      overflow-y: auto;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dropdown-group-lbl {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 8px 8px 3px;
+    }
+
+    .dropdown-item {
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      padding: 7px 10px;
+      border-radius: 7px;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dropdown-item:hover {
+      background: var(--beige-tint);
+    }
+
+    .dropdown-item.selected {
+      background: var(--navy);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .item-count {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+    }
+
+    .dropdown-item.selected .item-count {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .compact-select {
+      height: 38px;
+      padding: 0 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .compact-select:focus {
+      outline: none;
+      border-color: var(--slate-blue);
+    }
+
+    .clear-btn {
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--beige-tint);
+      color: var(--navy);
+      font-family: var(--font-sans);
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .clear-btn:hover {
+      background: var(--bg-subtle);
+    }
+
+    /* Sub-bar: Result Count + Legend */
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Modern Precision Table / List View for People */
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .table-head {
+      display: grid;
+      grid-template-columns: 250px 1fr 130px 110px;
+      gap: 16px;
+      padding: 11px 18px;
+      background: var(--beige-tint);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+    }
+
+    .person-row {
+      display: grid;
+      grid-template-columns: 250px 1fr 130px 110px;
+      gap: 16px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #ece6d9;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+
+    .person-row:last-child {
+      border-bottom: none;
+    }
+
+    .person-row:hover {
+      background: var(--bg-hover);
+    }
+
+    .person-row.is-leave {
+      background: #fdfbf6;
+    }
+
+    .person-cell {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--navy);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .p-name {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.94rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .p-role {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .skills-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .s-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      border-radius: 7px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .s-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(20, 40, 75, 0.12);
+    }
+
+    .s-pill.match {
+      outline: 2px solid var(--slate-blue);
+      outline-offset: 1px;
+    }
+
+    .lvl-1 {
+      background: var(--beige-tint);
+      color: #3f3a31;
+      border-color: var(--border);
+    }
+
+    .lvl-2 {
+      background: var(--blue-tint);
+      color: var(--navy);
+      border-color: var(--blue-border);
+    }
+
+    .lvl-3 {
+      background: var(--navy);
+      color: #ffffff;
+      border-color: var(--navy);
+    }
+
+    .lvl-chip {
+      font-size: 0.7rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .lvl-3 .lvl-chip {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+    }
+
+    .reg-tag {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: #ffffff;
+      color: var(--slate-blue);
+      border: 1px solid var(--blue-border);
+      font-weight: 700;
+    }
+
+    .lvl-3 .reg-tag {
+      background: rgba(255, 255, 255, 0.14);
+      color: #e2e8f0;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .unproven-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76rem;
+      color: var(--red-text);
+    }
+
+    .unproven-badge {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      color: var(--red-text);
+      padding: 1px 7px;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.74rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .st-active {
+      background: var(--green-bg);
+      color: var(--green-text);
+      border: 1px solid var(--green-border);
+    }
+
+    .st-leave {
+      background: var(--amber-bg);
+      color: var(--amber-text);
+      border: 1px solid var(--amber-border);
+    }
+
+    .action-cell {
+      text-align: right;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--slate-blue);
+    }
+
+    .person-row:hover .action-cell {
+      color: var(--navy);
+      text-decoration: underline;
+    }
+
+    /* View 2: Halcyon Bid Shortlist */
+    .bid-header-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--navy);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bid-header-card h2 {
+      margin: 0 0 3px;
+      font-size: 1.15rem;
+      color: var(--navy);
+    }
+
+    .bid-header-card p {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    .bid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 14px;
+    }
+
+    .bid-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .bid-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      border-bottom: 1px solid #ece6d9;
+      padding-bottom: 8px;
+    }
+
+    .bid-card-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .slot-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--blue-tint);
+      color: var(--navy);
+    }
+
+    .slot-pill.warn {
+      background: var(--amber-bg);
+      color: var(--amber-text);
+    }
+
+    .cand-box {
+      background: var(--bg-hover);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 11px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .cand-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cand-name {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .cand-name:hover {
+      text-decoration: underline;
+    }
+
+    .cand-sub {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .cand-note {
+      margin: 0;
+      font-size: 0.81rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .proof-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .proof-chip {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1px solid var(--blue-border);
+      background: #ffffff;
+      color: var(--slate-blue);
+      cursor: pointer;
+    }
+
+    .proof-chip:hover {
+      background: var(--navy);
+      color: #ffffff;
+      border-color: var(--navy);
+    }
+
+    .gap-banner {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      color: var(--amber-text);
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 0.8rem;
+    }
+
+    /* View 3: Skills Breakdown List */
+    .skills-table {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 220px 110px 1fr;
+      gap: 16px;
+      padding: 13px 18px;
+      border-bottom: 1px solid #ece6d9;
+      align-items: center;
+    }
+
+    .skill-row:last-child {
+      border-bottom: none;
+    }
+
+    .sk-title {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.9rem;
+    }
+
+    .sk-cat {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Slide-over Dossier Drawer */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.45);
+      backdrop-filter: blur(2px);
+      display: none;
+      justify-content: flex-end;
+      z-index: 100;
+    }
+
+    .drawer-overlay.open {
+      display: flex;
+    }
+
+    .drawer {
+      width: 100%;
+      max-width: 540px;
+      height: 100%;
+      background: #ffffff;
+      border-left: 1px solid var(--border);
+      box-shadow: -10px 0 35px rgba(20, 40, 75, 0.18);
+      display: flex;
+      flex-direction: column;
+      animation: slideIn 0.18s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .drawer-header {
+      padding: 18px 22px;
+      background: var(--navy);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .drawer-header h3 {
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .drawer-header p {
+      margin: 3px 0 0;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .drawer-close {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-radius: 7px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .drawer-close:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .drawer-body {
+      padding: 18px 22px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sec-heading {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    .receipt-card {
+      background: var(--bg-hover);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 11px 13px;
+    }
+
+    .receipt-card.note {
+      background: var(--blue-tint);
+      border-color: var(--blue-border);
+    }
+
+    .receipt-meta {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .id-tag {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .receipt-text {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 860px) {
+      .table-head { display: none; }
+      .person-row, .skill-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .action-cell { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Top Header -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">BI</div>
+        <div>
+          <span class="brand-name">Bluefin Insights</span>
+          <span class="brand-sub">Live Skills Inventory</span>
+        </div>
+      </div>
+
+      <nav class="nav-pills" role="tablist">
+        <button class="nav-tab active" id="tab-people" type="button">
+          People <span class="tab-badge">25</span>
+        </button>
+        <button class="nav-tab" id="tab-skills" type="button">
+          Skills Index <span class="tab-badge">20</span>
+        </button>
+        <button class="nav-tab" id="tab-bid" type="button">
+          Halcyon Bid <span class="tab-badge">6</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="app-root">
+    <!-- TAB 1: PEOPLE DIRECTORY -->
+    <section id="view-people">
+      <!-- Precise KPI Summary -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Active Staff</div>
+          <div class="kpi-value" id="kpi-active">24 / 25</div>
+          <div class="kpi-sub">1 on leave (Devika Menon)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Verified Skill Links</div>
+          <div class="kpi-value" id="kpi-skills">50</div>
+          <div class="kpi-sub">Across 20 tracked skills</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Unproven 2024 Claims</div>
+          <div class="kpi-value" id="kpi-unproven">14</div>
+          <div class="kpi-sub">Flagged from old register</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Halcyon Bid Readiness</div>
+          <div class="kpi-value">10 / 12</div>
+          <div class="kpi-sub">1 Tamil · 1 Marathi specialist</div>
+        </div>
+      </div>
+
+      <!-- Compact Modern Toolbar with Searchable List Dropdown for Skills -->
+      <div class="toolbar">
+        <div class="search-wrap">
+          <span class="search-ico">⌕</span>
+          <input type="text" id="search-input" placeholder="Search person, role, or skill..." />
+        </div>
+
+        <div class="skill-dropdown" id="skill-dropdown">
+          <button class="dropdown-trigger" id="skill-trigger" type="button">
+            <span id="skill-trigger-text">Filter by Skill: All (20)</span>
+            <span>▾</span>
+          </button>
+          <div class="dropdown-menu" id="skill-menu">
+            <div class="dropdown-search">
+              <input type="text" id="skill-search-input" placeholder="Type to filter skill list..." />
+            </div>
+            <div class="dropdown-list" id="skill-dropdown-list"></div>
+          </div>
+        </div>
+
+        <select class="compact-select" id="level-select" aria-label="Minimum proficiency level">
+          <option value="1">Level: All (L1–L3)</option>
+          <option value="2">Level 2+ (Working &amp; Expert)</option>
+          <option value="3">Level 3 Only (Expert)</option>
+        </select>
+
+        <select class="compact-select" id="team-select" aria-label="Filter by team">
+          <option value="">Team: All</option>
+        </select>
+
+        <select class="compact-select" id="status-select" aria-label="Filter by availability">
+          <option value="">Status: All</option>
+          <option value="Active">Active Only</option>
+          <option value="On leave">On Leave</option>
+        </select>
+
+        <button class="clear-btn" id="reset-btn" type="button">Reset</button>
+      </div>
+
+      <div class="meta-bar">
+        <div id="result-summary">Showing 25 of 25 staff</div>
+        <div class="legend-row">
+          <span class="s-pill lvl-3" style="cursor:default;padding:2px 8px;">L3 Expert</span>
+          <span class="s-pill lvl-2" style="cursor:default;padding:2px 8px;">L2 Working</span>
+          <span class="s-pill lvl-1" style="cursor:default;padding:2px 8px;">L1 Basic</span>
+          <span class="reg-tag">2024 reg</span>
+          <span>= in 2024 register</span>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-head">
+          <div>Employee</div>
+          <div>Verified Skills &amp; 2024 Register Audit</div>
+          <div>Availability</div>
+          <div style="text-align:right;">Evidence</div>
+        </div>
+        <div id="people-rows"></div>
+      </div>
+    </section>
+
+    <!-- TAB 2: SKILLS INDEX (Clean List View by Skill) -->
+    <section id="view-skills" class="hidden">
+      <div class="bid-header-card">
+        <div>
+          <h2>Skills Index (20 Tracked Skills)</h2>
+          <p>Click any person badge to inspect the chat messages or project notes proving their proficiency.</p>
+        </div>
+      </div>
+      <div class="skills-table" id="skills-rows"></div>
+    </section>
+
+    <!-- TAB 3: HALCYON BID SHORTLIST -->
+    <section id="view-bid" class="hidden">
+      <div class="bid-header-card">
+        <div>
+          <h2>Halcyon Bank Bid — Top 2 Candidates per Need</h2>
+          <p>Customer-experience study across Tamil Nadu &amp; Maharashtra · Names due <strong>Friday 2 Oct 2026</strong></p>
+        </div>
+      </div>
+      <div class="bid-grid" id="bid-grid"></div>
+    </section>
+  </main>
+
+  <!-- Slide-over Receipt Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay">
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-title">Evidence</h3>
+          <p id="drawer-sub"></p>
+        </div>
+        <button class="drawer-close" id="drawer-close" type="button">Close ✕</button>
+      </div>
+      <div class="drawer-body" id="drawer-body"></div>
+    </aside>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById("app-root");
+      if (!window.BLUEFIN_DATA) {
+        root.innerHTML = '<div style="padding:18px;border:1px solid #edc2bc;border-radius:10px;background:#fdf0ee;color:#9b2c2c;"><strong>Could not load data.js.</strong> Make sure <code>data.js</code> is saved in the exact same folder as <code>index.html</code>.</div>';
+        return;
+      }
+
+      const DATA = window.BLUEFIN_DATA;
+      const LEVEL_LABELS = DATA.meta.levels || { "1": "Basic", "2": "Working", "3": "Expert" };
+
+      const NOTE_SUMMARIES = {
+        "2026-06_medora_patient_survey_retro.md": "Retrospective: Medora Diagnostics patient-experience study (April–June 2026, Chennai & Coimbatore). Online survey of 1,200 patients and 42 in-depth interviews. Lakshmi Narayanan designed the questionnaire/guide and ran 30 of 42 interviews in Tamil; Devika Menon led the project and reviewed the questionnaire; Divya Reddy scripted the online survey; Manoj Yadav contracted the Chennai field agency.",
+        "2026-07_pragati_churn_study_retro.md": "Retrospective: Pragati Finance churn study (May–July 2026). Identified borrower churn across personal, gold, and two-wheeler loans. Rahul Kumar wrote the SQL warehouse extract and Python row-count check; Pooja Desai built the logistic regression and gradient boosting churn models (AUC 0.81); Farhan Qureshi reviewed statistics and fixed restructured loan treatment; Kabir Malhotra built Excel summary tables; Rohan Mehta wrote the proposal and presented to the CFO.",
+        "2026-07_rangoli_dashboard_handover.md": "Handover note: Rangoli Threads brand and sales dashboard (July 2026). Live nightly Power BI dashboard. Sneha Ghosh built the Power BI dashboard, returns queries, and store drill-down; Arvind Pillai built the SQL views and 2 a.m. refresh; Zoya Siddiqui restyled report pages in Power BI; Aisha Khan ran 120 store intercepts in Delhi and Jaipur; Harpreet Kaur wrote the contract extension; Vikram Sethi managed the client and go-live.",
+        "2026-08_sunleaf_rural_fieldwork_note.md": "Field note: Sunleaf Foods rural study in Maharashtra & West Bengal (July–August 2026). Nikhil Joshi moderated all 6 Marathi focus groups and ran 20 interviews in Nashik, Satara, and Latur; Sourav Banerjee ran 12 Bengali interviews in Kolkata; Manoj Yadav negotiated 12% off Pune agency rates; Kavya Nair managed three scope changes while holding budget; Meera Rao joined an escalation call with the MD.",
+        "2026-09_shikhar_enquiry_funnel_note.md": "Project note: Shikhar Classes enquiry funnel (August–September 2026). Mapped enquiry-to-enrolment across five centres. Rahul Kumar cleaned the messy SQL export (three date formats) and fixed a lookup error in Kabir's Excel funnel model; Kabir Malhotra built the Excel funnel model and scoped phase 2 ML with Pooja Desai; Rahul Kapoor (intern) built a simple Excel summary; Harpreet Kaur wrote the phase 2 proposal.",
+        "2026-09_third_cup_survey_retro.md": "Retrospective: Third Cup Cafés customer survey (July–September 2026, 12 Delhi NCR outlets). Harpreet Kaur wrote the three-option proposal; Meera Rao pitched it to the founders; Divya Reddy scripted the survey; Lakshmi Narayanan reviewed the survey and ran in-café interviews alongside Aisha Khan; Neha Agarwal negotiated panel costs from Rs 180 to Rs 140 and costed the project in Excel; Siddharth Jain presented interim findings."
+      };
+
+      const messageById = {};
+      (DATA.messages || []).forEach(m => { messageById[m.id] = m; });
+
+      const personByName = {};
+      (DATA.people || []).forEach(p => { personByName[p.name] = p; });
+
+      // Filter state
+      const state = {
+        search: "",
+        skill: "",
+        minLevel: 1,
+        team: "",
+        status: ""
+      };
+
+      // DOM elements
+      const tabPeople = document.getElementById("tab-people");
+      const tabSkills = document.getElementById("tab-skills");
+      const tabBid = document.getElementById("tab-bid");
+      const viewPeople = document.getElementById("view-people");
+      const viewSkills = document.getElementById("view-skills");
+      const viewBid = document.getElementById("view-bid");
+
+      const searchInput = document.getElementById("search-input");
+      const skillDropdown = document.getElementById("skill-dropdown");
+      const skillTrigger = document.getElementById("skill-trigger");
+      const skillTriggerText = document.getElementById("skill-trigger-text");
+      const skillMenu = document.getElementById("skill-menu");
+      const skillSearchInput = document.getElementById("skill-search-input");
+      const skillDropdownList = document.getElementById("skill-dropdown-list");
+
+      const levelSelect = document.getElementById("level-select");
+      const teamSelect = document.getElementById("team-select");
+      const statusSelect = document.getElementById("status-select");
+      const resetBtn = document.getElementById("reset-btn");
+      const resultSummary = document.getElementById("result-summary");
+      const peopleRows = document.getElementById("people-rows");
+      const skillsRows = document.getElementById("skills-rows");
+      const bidGrid = document.getElementById("bid-grid");
+
+      const drawerOverlay = document.getElementById("drawer-overlay");
+      const drawerTitle = document.getElementById("drawer-title");
+      const drawerSub = document.getElementById("drawer-sub");
+      const drawerBody = document.getElementById("drawer-body");
+      const drawerClose = document.getElementById("drawer-close");
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function initials(name) {
+        return name.split(" ").map(x => x[0]).slice(0, 2).join("").toUpperCase();
+      }
+
+      // Compute KPI totals accurately
+      const totalVerifiedSkills = DATA.people.reduce((sum, p) => sum + p.skills.length, 0);
+      const totalUnproven = DATA.people.reduce((sum, p) => sum + ((p.register2024 && p.register2024.unprovenTrackedSkills) ? p.register2024.unprovenTrackedSkills.length : 0), 0);
+      document.getElementById("kpi-skills").textContent = totalVerifiedSkills;
+      document.getElementById("kpi-unproven").textContent = totalUnproven;
+
+      // Populate Team Select
+      Array.from(new Set(DATA.people.map(p => p.team))).forEach(team => {
+        const opt = document.createElement("option");
+        opt.value = team;
+        opt.textContent = `Team: ${team}`;
+        teamSelect.appendChild(opt);
+      });
+
+      // Count holders per skill for the list dropdown
+      const skillCounts = {};
+      Object.values(DATA.skillTaxonomy).flat().forEach(sk => {
+        skillCounts[sk] = DATA.people.filter(p => p.skills.some(s => s.skill === sk)).length;
+      });
+
+      function renderSkillDropdownList(filterText = "") {
+        const q = filterText.trim().toLowerCase();
+        skillDropdownList.innerHTML = "";
+
+        if (!q) {
+          const allBtn = document.createElement("button");
+          allBtn.type = "button";
+          allBtn.className = `dropdown-item${state.skill === "" ? " selected" : ""}`;
+          allBtn.innerHTML = `<span>All 20 Skills</span><span class="item-count">25</span>`;
+          allBtn.addEventListener("click", () => selectSkill(""));
+          skillDropdownList.appendChild(allBtn);
+        }
+
+        Object.entries(DATA.skillTaxonomy).forEach(([group, skills]) => {
+          const matching = skills.filter(sk => !q || sk.toLowerCase().includes(q) || group.toLowerCase().includes(q));
+          if (matching.length === 0) return;
+
+          const lbl = document.createElement("div");
+          lbl.className = "dropdown-group-lbl";
+          lbl.textContent = group;
+          skillDropdownList.appendChild(lbl);
+
+          matching.forEach(sk => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = `dropdown-item${state.skill === sk ? " selected" : ""}`;
+            btn.innerHTML = `<span>${escapeHtml(sk)}</span><span class="item-count">${skillCounts[sk]}</span>`;
+            btn.addEventListener("click", () => selectSkill(sk));
+            skillDropdownList.appendChild(btn);
+          });
+        });
+      }
+
+      function selectSkill(sk) {
+        state.skill = sk;
+        if (sk) {
+          skillTriggerText.textContent = `Skill: ${sk} (${skillCounts[sk]})`;
+          skillTrigger.classList.add("has-value");
+        } else {
+          skillTriggerText.textContent = "Filter by Skill: All (20)";
+          skillTrigger.classList.remove("has-value");
+        }
+        skillMenu.classList.remove("open");
+        renderSkillDropdownList(skillSearchInput.value);
+        renderPeople();
+      }
+
+      skillTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const willOpen = !skillMenu.classList.contains("open");
+        skillMenu.classList.toggle("open", willOpen);
+        if (willOpen) {
+          skillSearchInput.value = "";
+          renderSkillDropdownList("");
+          setTimeout(() => skillSearchInput.focus(), 20);
+        }
+      });
+
+      skillSearchInput.addEventListener("input", (e) => {
+        renderSkillDropdownList(e.target.value);
+      });
+
+      skillMenu.addEventListener("click", (e) => e.stopPropagation());
+      document.addEventListener("click", () => skillMenu.classList.remove("open"));
+
+      function createSkillPill(personName, skillObj, highlight, customText) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `s-pill lvl-${skillObj.level}${highlight ? " match" : ""}`;
+        const lvlText = LEVEL_LABELS[String(skillObj.level)] || `L${skillObj.level}`;
+        const regHtml = skillObj.in2024Register ? `<span class="reg-tag" title="Also listed in 2024 skills register">2024 reg</span>` : "";
+        btn.innerHTML = `
+          <span>${escapeHtml(customText || skillObj.skill)}</span>
+          <span class="lvl-chip">L${skillObj.level} · ${escapeHtml(lvlText)}</span>
+          ${regHtml}
+        `;
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openSkillDrawer(personName, skillObj);
+        });
+        return btn;
+      }
+
+      function renderPeople() {
+        const q = state.search.trim().toLowerCase();
+        let filtered = DATA.people.filter(p => {
+          if (state.team && p.team !== state.team) return false;
+          if (state.status && p.status !== state.status) return false;
+          if (state.skill) {
+            const match = p.skills.find(s => s.skill === state.skill && s.level >= state.minLevel);
+            if (!match) return false;
+          } else if (state.minLevel > 1) {
+            if (!p.skills.some(s => s.level >= state.minLevel)) return false;
+          }
+          if (q) {
+            const hit =
+              p.name.toLowerCase().includes(q) ||
+              p.role.toLowerCase().includes(q) ||
+              p.team.toLowerCase().includes(q) ||
+              p.skills.some(s => s.skill.toLowerCase().includes(q));
+            if (!hit) return false;
+          }
+          return true;
+        });
+
+        if (state.skill) {
+          filtered.sort((a, b) => {
+            const aL = (a.skills.find(s => s.skill === state.skill) || { level: 0 }).level;
+            const bL = (b.skills.find(s => s.skill === state.skill) || { level: 0 }).level;
+            if (bL !== aL) return bL - aL;
+            if (a.status !== b.status) return a.status === "Active" ? -1 : 1;
+            return a.name.localeCompare(b.name);
+          });
+        }
+
+        resultSummary.textContent = state.skill
+          ? `Showing ${filtered.length} of ${DATA.people.length} staff with ${state.skill} (Level ${state.minLevel}+)`
+          : `Showing ${filtered.length} of ${DATA.people.length} staff`;
+
+        peopleRows.innerHTML = "";
+        if (filtered.length === 0) {
+          peopleRows.innerHTML = `<div style="padding:20px;color:var(--text-secondary);">No employees match your current filter selection.</div>`;
+          return;
+        }
+
+        filtered.forEach(person => {
+          const row = document.createElement("div");
+          row.className = `person-row${person.status !== "Active" ? " is-leave" : ""}`;
+          row.addEventListener("click", () => openPersonDrawer(person));
+
+          const pCell = document.createElement("div");
+          pCell.className = "person-cell";
+          pCell.innerHTML = `
+            <div class="avatar">${escapeHtml(initials(person.name))}</div>
+            <div style="min-width:0;">
+              <div class="p-name">${escapeHtml(person.name)}</div>
+              <div class="p-role">${escapeHtml(person.role)} · ${escapeHtml(person.team)}</div>
+            </div>
+          `;
+
+          const sCell = document.createElement("div");
+          sCell.className = "skills-cell";
+
+          const pillRow = document.createElement("div");
+          pillRow.className = "pill-row";
+          if (!person.skills || person.skills.length === 0) {
+            pillRow.innerHTML = `<span style="font-size:0.82rem;color:var(--text-muted);font-style:italic;">No tracked skills proven in chat or project notes.</span>`;
+          } else {
+            [...person.skills]
+              .sort((a, b) => b.level - a.level || a.skill.localeCompare(b.skill))
+              .forEach(s => {
+                pillRow.appendChild(createSkillPill(person.name, s, Boolean(state.skill && s.skill === state.skill)));
+              });
+          }
+          sCell.appendChild(pillRow);
+
+          const reg = person.register2024 || {};
+          const unproven = reg.unprovenTrackedSkills || [];
+          const untracked = reg.untrackedLabelSkills || [];
+          if (unproven.length > 0 || untracked.length > 0) {
+            const uStrip = document.createElement("div");
+            uStrip.className = "unproven-strip";
+            let html = `<span>2024 register (no proof):</span>`;
+            if (unproven.length > 0) {
+              html += unproven.map(sk => `<span class="unproven-badge">${escapeHtml(sk)}</span>`).join("");
+            }
+            if (untracked.length > 0) {
+              html += `<span style="color:var(--text-muted);font-style:italic;">Non-tracked: ${escapeHtml(untracked.join(", "))}</span>`;
+            }
+            uStrip.innerHTML = html;
+            sCell.appendChild(uStrip);
+          }
+
+          const stCell = document.createElement("div");
+          const stClass = person.status === "Active" ? "st-active" : "st-leave";
+          stCell.innerHTML = `<span class="status-badge ${stClass}">${escapeHtml(person.status)}</span>`;
+
+          const proofCount = person.skills.reduce((sum, s) => sum + s.evidence.length, 0);
+          const actCell = document.createElement("div");
+          actCell.className = "action-cell";
+          actCell.textContent = `${proofCount} receipts →`;
+
+          row.appendChild(pCell);
+          row.appendChild(sCell);
+          row.appendChild(stCell);
+          row.appendChild(actCell);
+          peopleRows.appendChild(row);
+        });
+      }
+
+      function renderSkillsIndex() {
+        skillsRows.innerHTML = "";
+        Object.entries(DATA.skillTaxonomy).forEach(([category, skills]) => {
+          skills.forEach(sk => {
+            const holders = DATA.people
+              .map(p => {
+                const sObj = p.skills.find(s => s.skill === sk);
+                return sObj ? { person: p, skillObj: sObj } : null;
+              })
+              .filter(Boolean)
+              .sort((a, b) => b.skillObj.level - a.skillObj.level || a.person.name.localeCompare(b.person.name));
+
+            const row = document.createElement("div");
+            row.className = "skill-row";
+            row.innerHTML = `
+              <div>
+                <div class="sk-title">${escapeHtml(sk)}</div>
+                <div class="sk-cat">${escapeHtml(category)}</div>
+              </div>
+              <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);">
+                ${holders.length} ${holders.length === 1 ? "person" : "people"}
+              </div>
+            `;
+
+            const holdersCell = document.createElement("div");
+            holdersCell.className = "pill-row";
+            if (holders.length === 0) {
+              holdersCell.innerHTML = `<span style="font-size:0.82rem;color:var(--text-muted);font-style:italic;">No verified holders</span>`;
+            } else {
+              holders.forEach(({ person, skillObj }) => {
+                const lbl = `${person.name}${person.status !== "Active" ? " (" + person.status + ")" : ""}`;
+                holdersCell.appendChild(createSkillPill(person.name, skillObj, false, lbl));
+              });
+            }
+
+            row.appendChild(holdersCell);
+            skillsRows.appendChild(row);
+          });
+        });
+      }
+
+      function renderBidView() {
+        bidGrid.innerHTML = "";
+        (DATA.halcyonRequirements || []).forEach(req => {
+          const card = document.createElement("article");
+          card.className = "bid-card";
+          const picks = req.topCandidates || [];
+          const pillClass = picks.length === 2 ? "slot-pill" : "slot-pill warn";
+
+          card.innerHTML = `
+            <div class="bid-card-top">
+              <div>
+                <h3 class="bid-card-title">${escapeHtml(req.label)}</h3>
+                <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:2px;">${escapeHtml(req.notes)}</div>
+              </div>
+              <span class="${pillClass}">${picks.length}/2</span>
+            </div>
+          `;
+
+          picks.forEach((pick, idx) => {
+            const person = personByName[pick.name];
+            if (!person) return;
+
+            const primaryObj = person.skills.find(s => s.skill === pick.primarySkill);
+            const extraObjs = (pick.extraSkills || [])
+              .map(sk => person.skills.find(s => s.skill === sk))
+              .filter(Boolean);
+
+            const isAvail = person.status === "Active";
+            const stClass = isAvail ? "st-active" : "st-leave";
+
+            const box = document.createElement("div");
+            box.className = "cand-box";
+            box.innerHTML = `
+              <div class="cand-top">
+                <div>
+                  <div class="cand-name">#${idx + 1} · ${escapeHtml(person.name)}</div>
+                  <div class="cand-sub">${escapeHtml(person.role)} · ${escapeHtml(person.team)}</div>
+                </div>
+                <span class="status-badge ${stClass}">${isAvail ? "Available" : escapeHtml(person.status)}</span>
+              </div>
+            `;
+
+            box.querySelector(".cand-name").addEventListener("click", () => openPersonDrawer(person));
+
+            const pills = document.createElement("div");
+            pills.className = "pill-row";
+            if (primaryObj) pills.appendChild(createSkillPill(person.name, primaryObj, true));
+            extraObjs.forEach(s => pills.appendChild(createSkillPill(person.name, s, false)));
+            box.appendChild(pills);
+
+            if (pick.note) {
+              const p = document.createElement("p");
+              p.className = "cand-note";
+              p.textContent = pick.note;
+              box.appendChild(p);
+            }
+
+            if (primaryObj) {
+              const proofs = document.createElement("div");
+              proofs.className = "proof-row";
+              primaryObj.evidence.forEach(ref => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "proof-chip";
+                btn.textContent = ref;
+                btn.addEventListener("click", () => openSkillDrawer(person.name, primaryObj));
+                proofs.appendChild(btn);
+              });
+              box.appendChild(proofs);
+            }
+
+            card.appendChild(box);
+          });
+
+          if (picks.length < 2) {
+            const gap = document.createElement("div");
+            gap.className = "gap-banner";
+            gap.textContent = "Only 1 current employee has verified proof for this language. Pair with a qualitative researcher + local field agency.";
+            card.appendChild(gap);
+          }
+
+          bidGrid.appendChild(card);
+        });
+      }
+
+      function buildReceiptCards(refs) {
+        const frag = document.createDocumentFragment();
+        refs.forEach(ref => {
+          const div = document.createElement("div");
+          if (messageById[ref]) {
+            const m = messageById[ref];
+            div.className = "receipt-card";
+            div.innerHTML = `
+              <div class="receipt-meta">
+                <span class="id-tag">${escapeHtml(m.id)}</span>
+                <strong>${escapeHtml(m.author)}</strong>
+                <span>in #${escapeHtml(m.channel)}</span>
+                <span>· ${escapeHtml(m.timestamp)}</span>
+              </div>
+              <p class="receipt-text">${escapeHtml(m.message)}</p>
+            `;
+          } else {
+            div.className = "receipt-card note";
+            const summary = NOTE_SUMMARIES[ref] || "Project retrospective / handover note.";
+            div.innerHTML = `
+              <div class="receipt-meta">
+                <span class="id-tag">${escapeHtml(ref)}</span>
+                <strong>Project Note</strong>
+              </div>
+              <p class="receipt-text">${escapeHtml(summary)}</p>
+            `;
+          }
+          frag.appendChild(div);
+        });
+        return frag;
+      }
+
+      function openSkillDrawer(personName, skillObj) {
+        const lvlText = LEVEL_LABELS[String(skillObj.level)] || `Level ${skillObj.level}`;
+        drawerTitle.textContent = `${personName} — ${skillObj.skill}`;
+        drawerSub.textContent = `Level ${skillObj.level} (${lvlText}) · ${skillObj.evidence.length} proof item${skillObj.evidence.length === 1 ? "" : "s"}`;
+        drawerBody.innerHTML = "";
+        if (skillObj.rationale) {
+          const rBox = document.createElement("div");
+          rBox.className = "receipt-card note";
+          rBox.innerHTML = `<div class="receipt-meta"><strong>Why Level ${skillObj.level} (${escapeHtml(lvlText)})</strong></div><p class="receipt-text">${escapeHtml(skillObj.rationale)}</p>`;
+          drawerBody.appendChild(rBox);
+        }
+        drawerBody.appendChild(buildReceiptCards(skillObj.evidence));
+        drawerOverlay.classList.add("open");
+      }
+
+      function openPersonDrawer(person) {
+        drawerTitle.textContent = person.name;
+        drawerSub.textContent = `${person.role} · ${person.team} · ${person.status} (Joined ${person.joined})`;
+        drawerBody.innerHTML = "";
+
+        if (!person.skills || person.skills.length === 0) {
+          drawerBody.innerHTML = `<p style="color:var(--text-secondary);font-style:italic;">No tracked skills proven in chat or project notes.</p>`;
+        } else {
+          [...person.skills]
+            .sort((a, b) => b.level - a.level)
+            .forEach(s => {
+              const lvlText = LEVEL_LABELS[String(s.level)] || `L${s.level}`;
+              const h = document.createElement("div");
+              h.className = "sec-heading";
+              h.textContent = `${s.skill} — Level ${s.level} (${lvlText})${s.in2024Register ? " · In 2024 Register" : ""}`;
+              drawerBody.appendChild(h);
+              if (s.rationale) {
+                const rNote = document.createElement("div");
+                rNote.style.cssText = "font-size:0.83rem;color:#334155;background:#f8fafc;border-left:3px solid #2d5488;padding:6px 10px;border-radius:4px;";
+                rNote.textContent = s.rationale;
+                drawerBody.appendChild(rNote);
+              }
+              drawerBody.appendChild(buildReceiptCards(s.evidence));
+            });
+        }
+
+        const reg = person.register2024 || {};
+        const unproven = [...(reg.unprovenTrackedSkills || []), ...(reg.untrackedLabelSkills || [])];
+        if (unproven.length > 0) {
+          const h = document.createElement("div");
+          h.className = "sec-heading";
+          h.textContent = "In 2024 Skills Register (No Evidence Found)";
+          drawerBody.appendChild(h);
+
+          const wrap = document.createElement("div");
+          wrap.className = "pill-row";
+          unproven.forEach(x => {
+            const b = document.createElement("span");
+            b.className = "unproven-badge";
+            b.textContent = x;
+            wrap.appendChild(b);
+          });
+          drawerBody.appendChild(wrap);
+        }
+
+        drawerOverlay.classList.add("open");
+      }
+
+      function closeDrawer() {
+        drawerOverlay.classList.remove("open");
+      }
+
+      // Tab Switching
+      function activateTab(tab, view) {
+        [tabPeople, tabSkills, tabBid].forEach(t => t.classList.remove("active"));
+        [viewPeople, viewSkills, viewBid].forEach(v => v.classList.add("hidden"));
+        tab.classList.add("active");
+        view.classList.remove("hidden");
+      }
+
+      tabPeople.addEventListener("click", () => activateTab(tabPeople, viewPeople));
+      tabSkills.addEventListener("click", () => activateTab(tabSkills, viewSkills));
+      tabBid.addEventListener("click", () => activateTab(tabBid, viewBid));
+
+      // Filter listeners
+      searchInput.addEventListener("input", (e) => {
+        state.search = e.target.value;
+        renderPeople();
+      });
+
+      levelSelect.addEventListener("change", (e) => {
+        state.minLevel = parseInt(e.target.value, 10) || 1;
+        renderPeople();
+      });
+
+      teamSelect.addEventListener("change", (e) => {
+        state.team = e.target.value;
+        renderPeople();
+      });
+
+      statusSelect.addEventListener("change", (e) => {
+        state.status = e.target.value;
+        renderPeople();
+      });
+
+      resetBtn.addEventListener("click", () => {
+        state.search = "";
+        state.skill = "";
+        state.minLevel = 1;
+        state.team = "";
+        state.status = "";
+        searchInput.value = "";
+        levelSelect.value = "1";
+        teamSelect.value = "";
+        statusSelect.value = "";
+        skillTriggerText.textContent = "Filter by Skill: All (20)";
+        skillTrigger.classList.remove("has-value");
+        renderSkillDropdownList("");
+        renderPeople();
+      });
+
+      drawerClose.addEventListener("click", closeDrawer);
+      drawerOverlay.addEventListener("click", (e) => {
+        if (e.target === drawerOverlay) closeDrawer();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && drawerOverlay.classList.contains("open")) closeDrawer();
+      });
+
+      // Init
+      renderSkillDropdownList("");
+      renderPeople();
+      renderSkillsIndex();
+      renderBidView();
+    })();
+  </script>
+</body>
+</html>

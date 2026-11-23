@@ -1,0 +1,26 @@
+name,team,role,manager,joined,status
+Meera Rao,Leadership,Founder and CEO,,2014-04-01,Active
+Ananya Iyer,People,Head of People,Meera Rao,2019-02-11,Active
+Farhan Qureshi,Analytics,Head of Analytics,Meera Rao,2016-06-06,Active
+Vikram Sethi,Client Delivery,Head of Client Delivery,Meera Rao,2017-01-09,Active
+Devika Menon,Research,Research Manager,Meera Rao,2015-08-03,On leave
+Rahul Kumar,Analytics,Senior Analyst,Farhan Qureshi,2020-07-01,Active
+Sneha Ghosh,Analytics,Analyst,Farhan Qureshi,2023-01-16,Active
+Kabir Malhotra,Analytics,Analyst,Farhan Qureshi,2024-03-04,Active
+Rahul Kapoor,Analytics,Intern,Farhan Qureshi,2026-09-07,Active
+Pooja Desai,Analytics,Analyst,Farhan Qureshi,2022-05-02,Active
+Arvind Pillai,Analytics,Data Engineer,Farhan Qureshi,2021-03-15,Active
+Lakshmi Narayanan,Research,Senior Research Associate,Devika Menon,2019-06-17,Active
+Nikhil Joshi,Research,Research Associate,Devika Menon,2025-02-03,Active
+Aisha Khan,Research,Research Associate,Devika Menon,2022-08-08,Active
+Sourav Banerjee,Research,Research Associate,Devika Menon,2021-11-01,Active
+Divya Reddy,Research,Research Executive,Devika Menon,2024-07-01,Active
+Rohan Mehta,Client Delivery,Client Manager,Vikram Sethi,2018-09-03,Active
+Kavya Nair,Client Delivery,Client Manager,Vikram Sethi,2020-01-20,Active
+Harpreet Kaur,Client Delivery,Associate Client Manager,Vikram Sethi,2022-04-04,Active
+Siddharth Jain,Client Delivery,Associate,Vikram Sethi,2025-06-02,Active
+Zoya Siddiqui,Client Delivery,Insights Designer,Vikram Sethi,2024-05-13,Active
+Neha Agarwal,Operations,Finance and Operations Manager,Meera Rao,2017-10-02,Active
+Manoj Yadav,Operations,Field Operations Coordinator,Neha Agarwal,2018-03-12,Active
+Priya Sharma,People,HR Executive,Ananya Iyer,2023-07-03,Active
+Thomas D'Souza,Operations,IT and Admin Executive,Neha Agarwal,2016-11-21,Active
